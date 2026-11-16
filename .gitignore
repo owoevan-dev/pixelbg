@@ -1,0 +1,12 @@
+# Written by Claude Code for the editor; never committed.
+.claude-plugin/types/
+# Operating system and editor files.
+.DS_Store
+Thumbs.db
+*~
+*.swp
+# Logs, local tools and the review package.
+*.log
+node_modules/
+/review/
+/.private-terms

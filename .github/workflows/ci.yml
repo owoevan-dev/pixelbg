@@ -1,0 +1,60 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read the repository, nothing else.
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release-checks:
+    name: release checks (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          # Every commit, so the check reads each one's names, addresses and message.
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Privacy, files, manifests, links and code
+        run: node scripts/check.mjs
+      - name: The pictures still come from the code
+        run: |
+          node scripts/make-brand.mjs --check
+          node scripts/make-art.mjs --check
+
+  plugin:
+    name: validate and test the plugin
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DISABLE_AUTOUPDATER: '1'
+      CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Install Claude Code (pinned)
+        run: npm install --global @anthropic-ai/claude-code@2.1.325
+      - name: Validate
+        run: claude plugin validate .
+      - name: Test
+        run: claude plugin test .

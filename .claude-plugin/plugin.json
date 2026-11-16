@@ -1,0 +1,11 @@
+{
+  "name": "pixelbg",
+  "version": "0.1.0",
+  "description": "Your own pictures as a pixel-art backdrop behind the Claude desktop app's Code tab, with a picture library, a settings panel and colours taken from the picture.",
+  "author": { "name": "owoevan-dev" },
+  "homepage": "https://github.com/owoevan-dev/pixelbg",
+  "repository": "https://github.com/owoevan-dev/pixelbg",
+  "license": "MIT",
+  "keywords": ["backdrop", "background", "wallpaper", "pixel-art", "theme", "desktop"],
+  "icon": "./assets/brand/icon-512.png"
+}

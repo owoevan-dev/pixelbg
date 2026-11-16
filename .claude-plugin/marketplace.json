@@ -1,0 +1,6 @@
+{
+  "name": "pixelbg",
+  "owner": { "name": "owoevan-dev" },
+  "description": "pixelbg: your own pictures as a pixel-art backdrop behind the Claude desktop app's Code tab.",
+  "plugins": [{ "name": "pixelbg", "source": "./" }]
+}
