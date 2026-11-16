@@ -103,14 +103,16 @@ export const REMOVALS = 'T:/local/pixelbg/removed'
 
 /**
  * The engine hands hooks Windows paths, FFmpeg's arguments keep forward slashes: one key for both.
- * On a Windows test machine the engine also resolves a path from the root against the current
- * drive; the tests' Linux paths all live under /srv and /tmp, and keep that form whatever machine
- * runs them. (T: is the tests' own pretend drive, never one the engine adds.)
+ * The engine also makes paths absolute in the test machine's own way: on Windows a path from the
+ * root gets the current drive, and on Linux or macOS a drive path is relative, so it gets the
+ * working folder in front. The tests' pretend drive (T:) and their Linux paths (under /srv and
+ * /tmp) keep their own form whatever machine runs them.
  */
 export const key = (path: string) =>
   path
     .split(String.fromCharCode(92))
     .join('/')
+    .replace(/^\/.*?\/(?=[Tt]:\/)/, '')
     .replace(/^(?![Tt]:)[A-Za-z]:(?=\/(srv|tmp)\/)/, '')
 
 export function toBase64(bytes: Uint8Array): string {
