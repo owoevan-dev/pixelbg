@@ -176,6 +176,8 @@ const ALLOWED_EMAIL = /^\d+\+[A-Za-z0-9-]+@users\.noreply\.github\.com$/
 const COMMIT_EMAILS = [ALLOWED_EMAIL, new RegExp(any('^noreply', '@github\\.com$')), new RegExp(any('^noreply', '@anthropic\\.com$'))]
 /** The tests' pretend drive. */
 const TEST_DRIVE = new RegExp(any('^[Tt]', ':[\\\\/]'))
+/** What `exposures` is told it reads when it reads a commit message. */
+const COMMIT_MESSAGE = '<commit message>'
 /** Characters that make text read differently from how it runs (right-to-left overrides and isolates). */
 const HIDDEN = /[\u202A-\u202E\u2066-\u2069]/
 
@@ -233,7 +235,10 @@ function exposures(line, { file = '', addresses = [ALLOWED_EMAIL] } = {}) {
     // Every match on the line: a test's pretend drive excuses only itself, not a real path after it.
     const matches = [...line.matchAll(new RegExp(pattern.source, `${pattern.flags}g`))]
 
-    if (matches.some(match => !(what === 'a drive path' && file.startsWith('tests/') && TEST_DRIVE.test(line.slice(match.index))))) {
+    // The tests' pretend drive is allowed in the tests and in commit messages, which talk about them.
+    const pretend = file.startsWith('tests/') || file === COMMIT_MESSAGE
+
+    if (matches.some(match => !(what === 'a drive path' && pretend && TEST_DRIVE.test(line.slice(match.index))))) {
       found.push(`holds ${what}`)
     }
   }
@@ -305,7 +310,7 @@ if (git('rev-parse', '--verify', '--quiet', 'HEAD') !== undefined) {
       }
     }
     message.split('\n').forEach((line, i) => {
-      for (const what of exposures(line, { addresses: COMMIT_EMAILS })) {
+      for (const what of exposures(line, { file: COMMIT_MESSAGE, addresses: COMMIT_EMAILS })) {
         fail(`commit ${hash} message line ${i + 1}`, what)
       }
     })
