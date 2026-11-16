@@ -28,6 +28,8 @@ with one click.
 
 > **0.1.0 is a test release:** still pictures only, on Claude Code's mod support, which is early
 > access and may change. [Bug reports](https://github.com/owoevan-dev/pixelbg/issues) are welcome.
+>
+> pixelbg is an independent project, not made, endorsed or supported by Anthropic.
 
 ## Quick start
 
@@ -240,3 +242,7 @@ the checks, for working on a copy of your own.
 [MIT](LICENSE) © 2026 owoevan-dev, except `hooks/make-colors.js` and its declarations, which are
 Anthropic's, copied unchanged from Claude Code's plugin-authoring skill ([THIRD_PARTY.md](THIRD_PARTY.md)).
 Every picture in this repository is drawn by its scripts from code alone.
+
+pixelbg is an independent project and is not affiliated with, endorsed by or supported by
+Anthropic. Claude and Claude Code are trademarks of Anthropic, used here only to say what pixelbg
+works with.
