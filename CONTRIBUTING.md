@@ -1,7 +1,12 @@
 # Contributing
 
-Thank you for helping. Bug reports, ideas and pull requests are all welcome; for a larger change,
-open an issue first so we can agree on the approach.
+Thank you for helping. Bug reports, ideas and corrections to a language are welcome as
+[issues](https://github.com/owoevan-dev/pixelbg/issues): say what happened, what you expected, and
+which versions of pixelbg, Claude Code and your system you use. A security problem goes through
+[SECURITY.md](SECURITY.md) instead.
+
+pixelbg does not take pull requests for now. You are welcome to fork it under the
+[MIT License](LICENSE); the rest of this page is for working on a copy of your own.
 
 ## Layout
 
@@ -32,7 +37,7 @@ open an issue first so we can agree on the approach.
 2. Load your copy in Claude Code with `claude --plugin-dir <path to your copy>`, or add the path to
    `CLAUDE_CODE_PLUGIN_DIRS` for the desktop app.
 
-## Before a pull request
+## Checking a change
 
 Run all three; CI runs them too.
 
@@ -45,8 +50,8 @@ claude plugin test .
 - Add or update a test for what you change. The encoder tests paint documents back into pixels and
   compare them exactly; keep them exact.
 - Every sentence goes in `hooks/strings/en.ts` and in each of the other fifteen files there (the
-  type checker and the tests refuse a missing one). If you cannot translate it, ask in the pull
-  request; a native speaker's correction of any language is welcome too.
+  type checker and the tests refuse a missing one). A native speaker's correction of any language
+  is welcome as an issue.
 - The mod must not use the network, and starts no programs but FFmpeg and the language lookup.
 - Keep personal data out: no real paths, names or pictures in code, tests or docs. The tests use a
   pretend drive (the letter T) and pictures drawn by code. `scripts/check.mjs` scans every line,
@@ -60,4 +65,5 @@ claude plugin test .
 
 ## License
 
-By contributing, you agree that your contributions are licensed under the [MIT License](LICENSE).
+pixelbg is under the [MIT License](LICENSE), except the two Anthropic files described in
+[THIRD_PARTY.md](THIRD_PARTY.md).

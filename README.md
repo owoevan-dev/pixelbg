@@ -226,13 +226,14 @@ portrait shots) is read upright, at its shown width and height.
 | [SECURITY.md](SECURITY.md) | Reporting a vulnerability, and what matters for security |
 | [THIRD_PARTY.md](THIRD_PARTY.md) | What it uses from others |
 | [CHANGELOG.md](CHANGELOG.md) | What changed in each version |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | The layout, the tests and the release checks |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Reporting a problem; the layout, the tests and the release checks |
 
 ## Contributing
 
-Bug reports and ideas are welcome as [issues](https://github.com/owoevan-dev/pixelbg/issues). Pull
-requests are welcome too; for a larger change, open an issue first. [CONTRIBUTING.md](CONTRIBUTING.md)
-has the layout and the checks a change must pass.
+Bug reports, ideas and corrections to a language are welcome as
+[issues](https://github.com/owoevan-dev/pixelbg/issues). pixelbg does not take pull requests for now;
+you are welcome to fork it under the MIT licence. [CONTRIBUTING.md](CONTRIBUTING.md) has the layout and
+the checks, for working on a copy of your own.
 
 ## Licence
 
